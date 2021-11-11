@@ -232,6 +232,31 @@ async function run() {
             const result = await CarsCollection.insertOne(products);
             res.json(result);
             console.log(result);
+        });
+
+
+        // get all services
+
+
+        app.get("/services", async (req, res) => {
+
+            const cursor = CarsCollection.find({});
+            const result = await cursor.toArray();
+
+            res.json(result);
+            // console.log(result);
+
+        });
+
+        // delete services
+
+        app.delete("/services/:id",async(req,res)=>{
+            const id = req.params.id;
+
+            const query = {_id: ObjectId(id)};
+            const result =await CarsCollection.deleteOne(query);
+            console.log(result);
+            res.json(result);
         })
 
 
